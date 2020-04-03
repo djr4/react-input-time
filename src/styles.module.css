@@ -1,9 +1,35 @@
 /* add css module styles here (optional) */
 
-.test {
-  margin: 2em;
-  padding: 0.5em;
-  border: 2px solid #000;
-  font-size: 2em;
+.InputTime {
+  position: relative;
+}
+
+.InputTime input[type="text"] {
+  outline: none;
+  border: none;
+  background: #fff;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  color: #202c3d;
+  width: 45px;
   text-align: center;
+}
+
+.InputTime--wrapper {
+  border: 1px solid #f4f4f4;
+  padding: 8px 16px;
+  border-radius: 32px;
+  display: inline;
+}
+
+.inputTime--separator {
+  color: #aeaeae;
+}
+
+.inputTime--label {
+  display: inline;
+  font-size: 14px;
+  color: #202c3d;
+  margin-right: 8px;
 }
