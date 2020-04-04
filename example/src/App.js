@@ -9,10 +9,10 @@ const App = () => {
       React Input Time Component
     </h1>
     <InputTime
+      iconLeft
       onChange={(e) => { console.log(e)}}
       value={`${new Date().getHours()}:${new Date().getMinutes()}`}
       label={'Time Now? '}
-      inputStyle={{ width: 20, }}
       />
     <p>
       React Input time component is simple implementation of 24h format time input field. <i>OnChange</i> and <i>onInit</i> events are supported. Also you can change <i>componentStyle</i> and <i>inputStyle</i> to suit your needs.
@@ -35,16 +35,22 @@ import { InputTime } from 'input-time'
     onChange={(e) => { console.log(e)}}
     value={'10:00'}
     label={'Opening hours'}
-    inputStyle={{ width: 20, }}
+    inputStyle={{ width: 35, }}
   />`
       }
       </code>
     </pre>
     <div style={{ display: 'flex'}}>
-      <div><InputTime onChange={(e) => { console.log(e)}} value={`10:00`} label={`Opening hours`} inputStyle={{ width: 20, }} /></div>
-      <div style={{ marginLeft: 32, }}><InputTime onChange={(e) => { console.log(e)}} value={`12:30`} label={`Closing hours`} inputStyle={{ width: 20, }} /></div>
+      <div><InputTime onChange={(e) => { console.log(e)}} iconRight value={`07:00`} label={`Opening hours`} inputStyle={{ width: 35, }} /></div>
+      <div style={{ marginLeft: 32, }}><InputTime iconRight onChange={(e) => { console.log(e)}} value={`19:30`} label={`Closing hours`} inputStyle={{ width: 35, }} /></div>
     </div>
-    <h3>Styling</h3>
+    <h3>Some predefined styles</h3>
+    <p>Rounded component is default</p>
+    <div style={{ marginTop: 8, }}><InputTime iconRight value={`19:30`} /></div>
+    <p>if you add <b>rect</b> property to the component you get standard input look</p>
+    <div><InputTime rect iconRight value={`20:30`}  /></div>
+    <p style={{ marginTop: 32, padding: '8px 16px', background: '#ffedd1'}}>NOTE: by default icons are not shown. you should add <b>iconLeft</b> or <b>iconRight</b> property.</p>
+    <h3>Custom Styling & Design related props</h3>
     <p>
       There are 2 properties you can manipulate and that's <b>componentStyle</b> and <b>inputStyle</b> for both props you pass object of css properties.
     </p>
@@ -67,8 +73,37 @@ import { InputTime } from 'input-time'
     <h5>Different styles</h5>
     <div style={{ marginTop: 32, }}>
       <div><InputTime onChange={(e) => { console.log(e)}} value={`16:25`} inputStyle={{ width: 20, }} /></div>
-      <div style={{ marginTop: 32, }}><InputTime onChange={(e) => { console.log(e)}} value={`22:14`} inputStyle={{ width: 85, }} /></div>
-      <div style={{ marginTop: 32, }}><InputTime onChange={(e) => { console.log(e)}} value={`23:59`} inputStyle={{ width: 85, fontWeight: 600 }} /></div>
+      <p>You can add icon left or right inside component</p>
+      <pre>
+        <code>
+        {
+`
+<InputTime
+  iconLeft
+  value={'22:14'}
+  inputStyle={{ width: 85, }}
+/>
+`
+        }
+        </code>
+      </pre>
+      <p>Let's try icon on the right with different color? blue?</p>
+      <div style={{ marginTop: 32, }}><InputTime iconLeft onChange={(e) => { console.log(e)}} value={`22:14`} inputStyle={{ width: 85, }} /></div>
+      <pre>
+        <code>
+{
+  `
+  <InputTime
+    iconRight
+    iconColor='#4A9CF9'
+    value={'23:59'}
+    inputStyle={{ width: 85, fontWeight: 600 }}
+  />
+  `
+}
+        </code>
+      </pre>
+      <div style={{ marginTop: 32, }}><InputTime iconRight iconColor="#4A9CF9" onChange={(e) => { console.log(e)}} value={`23:59`} inputStyle={{ width: 85, fontWeight: 600 }} /></div>
       <div style={{ marginTop: 32, }}>
         <pre><code>
 {
