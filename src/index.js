@@ -98,7 +98,6 @@ export class InputTime extends Component {
   }
 
   handleBlur(e, minutesBlured) {
-    console.log(this.toDouble(this.state.hours, this.state.minutes));
     if(e.target.value.length == 1) {
 
       if(minutesBlured) {
@@ -121,13 +120,33 @@ export class InputTime extends Component {
   render() {
     return(
       <div className={styles.InputTime}>
-      {
-        this.props.label ? <div className={styles['inputTime--label']}>{this.props.label}</div> : ''
-      }
-        <div className={styles['InputTime--wrapper']} style={this.props.componentStyle ? this.props.componentStyle : null}>
-          <input style={this.props.inputStyle ? this.props.inputStyle : null} onBlur={(e) => this.handleBlur(e)} onFocus={(e) => this.handleFocus(e)} ref={this.inputHours} onChange={(e) => this.handleHoursChange(e)} maxLength={2} type="text" value={this.state.hours || ''} />
+        {
+          this.props.label ? <div className={styles['inputTime--label']}>{this.props.label}</div> : ''
+        }
+        <div
+          className={styles['InputTime--wrapper']}
+          style={this.props.componentStyle ? this.props.componentStyle : null}
+        >
+          <input
+            style={this.props.inputStyle ? this.props.inputStyle : null}
+            onBlur={(e) => this.handleBlur(e)}
+            onFocus={(e) => this.handleFocus(e)}
+            ref={this.inputHours}
+            onChange={(e) => this.handleHoursChange(e)}
+            maxLength={2}
+            type="text"
+            value={this.state.hours || ''} />
           <span className={styles['inputTime--separator']}>:</span>
-          <input style={this.props.inputStyle ? this.props.inputStyle : null} onBlur={(e) => this.handleBlur(e, true)} onFocus={(e) => this.handleFocus(e)} ref={this.inputMinutes} onChange={(e) => this.handleMinutesChange(e)} maxLength={2} type="text" value={this.state.minutes || ''} onKeyDown={(e) => this.handleKeyDown(e)} />
+          <input
+            style={this.props.inputStyle ? this.props.inputStyle : null}
+            onBlur={(e) => this.handleBlur(e, true)}
+            onFocus={(e) => this.handleFocus(e)}
+            ref={this.inputMinutes}
+            onChange={(e) => this.handleMinutesChange(e)}
+            maxLength={2}
+            type="text"
+            value={this.state.minutes || ''}
+            onKeyDown={(e) => this.handleKeyDown(e)} />
         </div>
       </div>
     );
