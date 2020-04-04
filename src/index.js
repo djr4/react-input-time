@@ -12,6 +12,13 @@ export class InputTime extends Component {
           hours: this.props.value.split(':')[0],
           minutes: this.props.value.split(':')[1],
         }
+
+        if(this.props.onInit && typeof this.props.onInit === 'function') {
+          this.props.onInit({
+            timeDouble: this.toDouble(this.state.hours, this.state.minutes),
+            timeString: this.toString(this.state.hours, this.state.minutes),
+          })
+        }
       }
     }
     this.inputHours = React.createRef();

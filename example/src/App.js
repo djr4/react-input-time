@@ -15,6 +15,9 @@ const App = () => {
       <div style={{ marginTop: 32, }}><InputTime onChange={(e) => { console.log(e)}} value={`23:59`} inputStyle={{ width: 85, fontWeight: 600 }} /></div>
       <div style={{ marginTop: 32, }}><InputTime onChange={(e) => { console.log(e)}} value={`21:50`} componentStyle={{ border: '2px solid red'}} inputStyle={{ width: 45 }} /></div>
       <div style={{ marginTop: 32, }}><InputTime onChange={(e) => { console.log(e)}} value={`21:50`} componentStyle={{ border: '2px dashed #4A9CF9', borderRadius: 0, }} inputStyle={{ width: 45 }} /></div>
+      <div style={{ marginTop: 32, display: 'flex' }}>
+        <InputTime onInit={(e) => console.log('initialized', e)} onChange={(e) => { console.log(e)}} value={`21:50`} componentStyle={{ border: '2px dashed #4A9CF9', borderRadius: 0, }} inputStyle={{ width: 45 }} />
+      </div>
 
     </div>
   </div>
