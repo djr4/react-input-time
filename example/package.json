@@ -1,6 +1,6 @@
 {
   "name": "input-time-example",
-  "homepage": "https://djr4.github.io/input-time",
+  "homepage": "https://djr4.github.io/react-input-time",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
