@@ -31,7 +31,6 @@ const App = () => {
         `
 import { InputTime } from 'input-time'
 
-
   <InputTime
     onChange={(e) => { console.log(e)}}
     value={'10:00'}

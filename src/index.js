@@ -125,17 +125,42 @@ export class InputTime extends Component {
   }
 
   render() {
+    const inputStyle = {
+      outline: 'none',
+      border: 'none',
+      background: 'inherit',
+      margin: 0,
+      padding: 0,
+      fontSize: 12,
+      color: '#202c3d',
+      width: 45,
+      textAlign: 'center',
+    }
+
+    const inputLabelStyle = {
+      display: 'inline',
+      fontSize: 14,
+      color: '#202c3d',
+      marginRight: 8,
+    }
+
+    const inputWrapper = {
+      border: '1px solid #f4f4f4',
+      padding: '8px 16px',
+      borderRadius: 32,
+      display: 'inline',
+    }
+
     return(
-      <div className={styles.InputTime}>
+      <div style={{ position: 'relative'}}>
         {
-          this.props.label ? <div className={styles['inputTime--label']}>{this.props.label}</div> : ''
+          this.props.label ? <div style={inputLabelStyle}>{this.props.label}</div> : ''
         }
         <div
-          className={styles['InputTime--wrapper']}
-          style={this.props.componentStyle ? this.props.componentStyle : null}
+          style={this.props.componentStyle ? {...inputWrapper, ...this.props.componentStyle} : inputWrapper}
         >
           <input
-            style={this.props.inputStyle ? this.props.inputStyle : null}
+            style={this.props.inputStyle ? {...inputStyle, ...this.props.inputStyle} : inputStyle}
             onBlur={(e) => this.handleBlur(e)}
             onFocus={(e) => this.handleFocus(e)}
             ref={this.inputHours}
@@ -143,9 +168,9 @@ export class InputTime extends Component {
             maxLength={2}
             type="text"
             value={this.state.hours || ''} />
-          <span className={styles['inputTime--separator']}>:</span>
+          <span style={{ color: '#aeaeae' }}>:</span>
           <input
-            style={this.props.inputStyle ? this.props.inputStyle : null}
+            style={this.props.inputStyle ? {...inputStyle, ...this.props.inputStyle} : inputStyle}
             onBlur={(e) => this.handleBlur(e, true)}
             onFocus={(e) => this.handleFocus(e)}
             ref={this.inputMinutes}
