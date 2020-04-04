@@ -15,13 +15,26 @@ const App = () => {
       label={'Time Now? '}
       />
     <p>
-      React Input time component is simple implementation of 24h format time input field. <i>OnChange</i> and <i>onInit</i> events are supported. Also you can change <i>componentStyle</i> and <i>inputStyle</i> to suit your needs.
+      React Input time component is simple implementation of 24h format time input field. <i>OnChange</i> and <i>onInit</i> events are supported. Also you can change <i>componentStyle</i> and <i>inputStyle</i> to suit your needs. Find source code at <a href="https://github.com/djr4/react-input-time">github</a>.
     </p>
     <h3>Why another input time field for react?</h3>
     <p>
       Well to be honest I want really simple solution, nothing fancy. Nowdays every component seams to have too much functionality.
       I want European 24h format + some more control then standard input (type="time") html5 component.
     </p>
+    <h3>Installation</h3>
+    <p>
+    <pre>
+      <code>
+{
+  `
+    npm install --save input-time
+  `
+}
+      </code>
+    </pre>
+    </p>
+    <h3>Usage</h3>
     <p>
       Open console to see output of <b>onChange</b> callback.
     </p>
