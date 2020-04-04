@@ -1,8 +1,7 @@
 # input-time
 
-> input time component 24h format
-
-[![NPM](https://img.shields.io/npm/v/input-time.svg)](https://www.npmjs.com/package/input-time) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+## Demo
+https://djr4.github.io/react-input-time/
 
 ## Install
 
@@ -13,16 +12,14 @@ npm install --save input-time
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import InputTime from 'input-time'
 
-import MyComponent from 'input-time'
-import 'input-time/dist/index.css'
-
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
-}
+<InputTime
+  onChange={(e) => { console.log(e)}}
+  value={'10:00'}
+  label={'Opening hours'}
+  inputStyle={{ width: 20, }}
+/>
 ```
 
 ## License
