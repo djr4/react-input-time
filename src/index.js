@@ -128,7 +128,7 @@ export class InputTime extends Component {
     const prop = this.props.iconLeft ? { left: 0 } : { right: 0 };
     return(
       <span style={{ position: 'absolute', top: 0, ...prop }}>
-      <svg width="20px" height="20px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="clock" class="svg-inline--fa fa-clock fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill={this.props.iconColor || '#aeaeae'} d="M256,8C119,8,8,119,8,256S119,504,256,504,504,393,504,256,393,8,256,8Zm92.49,313h0l-20,25a16,16,0,0,1-22.49,2.5h0l-67-49.72a40,40,0,0,1-15-31.23V112a16,16,0,0,1,16-16h32a16,16,0,0,1,16,16V256l58,42.5A16,16,0,0,1,348.49,321Z"></path></svg>
+      <svg width="20px" height="20px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="clock" className="svg-inline--fa fa-clock fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill={this.props.iconColor || '#aeaeae'} d="M256,8C119,8,8,119,8,256S119,504,256,504,504,393,504,256,393,8,256,8Zm92.49,313h0l-20,25a16,16,0,0,1-22.49,2.5h0l-67-49.72a40,40,0,0,1-15-31.23V112a16,16,0,0,1,16-16h32a16,16,0,0,1,16,16V256l58,42.5A16,16,0,0,1,348.49,321Z"></path></svg>
       </span>
     )
   }
@@ -142,15 +142,16 @@ export class InputTime extends Component {
       padding: 0,
       fontSize: 12,
       color: '#202c3d',
-      width: 40,
+      width: 30,
       textAlign: 'center',
     }
 
     const inputLabelStyle = {
-      display: 'inline',
+      display: 'block',
       fontSize: 14,
-      color: '#202c3d',
+      color: this.props.labelColor ? this.props.labelColor : '#202c3d',
       marginRight: 8,
+      marginTop: 10,
     }
 
     let inputWrapper = {};
@@ -159,14 +160,15 @@ export class InputTime extends Component {
         border: '1px solid #f4f4f4',
         padding: '8px 16px',
         borderRadius: 'none',
-        display: 'inline',
+        display: 'block',
       }
     } else {
       inputWrapper = {
         border: '1px solid #f4f4f4',
         padding: '8px 16px',
         borderRadius: 32,
-        display: 'inline',
+        display: 'block',
+        width: this.props.iconLeft || this.props.iconRight ? 90 : 65,
       }
     }
 
@@ -179,7 +181,7 @@ export class InputTime extends Component {
     }
 
     return(
-      <div style={{ position: 'relative'}}>
+      <div style={{ display: 'flex', position: 'relative'}}>
         {
           this.props.label ? <div style={inputLabelStyle}>{this.props.label}</div> : ''
         }
