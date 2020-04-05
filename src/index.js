@@ -7,22 +7,84 @@ export class InputTime extends Component {
 
     this.state = {}
     if(this.props.value) {
-      if(this.props.value.length > 0 && this.props.value.split(':').length > 1) {
+      if(typeof this.props.value === 'string' && this.props.value.length > 0 && this.props.value.split(':').length > 1) {
+        const hours = this.props.value.split(':')[0];
+        const minutes = this.props.value.split(':')[1];
+
         this.state = {
-          hours: this.props.value.split(':')[0],
-          minutes: this.props.value.split(':')[1],
+          hours,
+          minutes,
         }
 
         if(this.props.onInit && typeof this.props.onInit === 'function') {
           this.props.onInit({
             timeDouble: this.toDouble(this.state.hours, this.state.minutes),
             timeString: this.toString(this.state.hours, this.state.minutes),
+            hours: parseInt(hours),
+            minutes: parseInt(minutes),
+          })
+        }
+      } else if(typeof this.props.value === 'number') {
+        const hours = this.toString(Math.floor(this.props.value));
+        const minutes = this.toString(null, this.props.value % 1 * 60);
+
+        this.state = {
+          hours,
+          minutes,
+        }
+
+        if(this.props.onInit && typeof this.props.onInit === 'function') {
+          this.props.onInit({
+            timeDouble: this.toDouble(this.state.hours, this.state.minutes),
+            timeString: this.toString(this.state.hours, this.state.minutes),
+            hours: parseInt(hours),
+            minutes: parseInt(minutes),
           })
         }
       }
     }
     this.inputHours = React.createRef();
     this.inputMinutes = React.createRef();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(this.props.value != nextProps.value && typeof nextProps.value === 'string') {
+
+      const hours = nextProps.value.split(':')[0];
+      const minutes = nextProps.value.split(':')[1];
+
+      this.setState({
+        hours,
+        minutes,
+      })
+
+      if(this.props.onChange && typeof this.props.onChange === 'function') {
+        this.props.onChange({
+          timeDouble: this.toDouble(hours, minutes),
+          timeString: this.toString(hours, minutes),
+          hours: parseInt(hours),
+          minutes: parseInt(minutes),
+        })
+      }
+    } else if(this.props.value != nextProps.value && typeof nextProps.value === 'number') {
+
+      const hours = this.toString(Math.floor(nextProps.value));
+      const minutes = this.toString(null, nextProps.value % 1 * 60);
+
+      this.setState({
+        hours,
+        minutes,
+      })
+
+      if(this.props.onChange && typeof this.props.onChange === 'function') {
+        this.props.onChange({
+          timeDouble: this.toDouble(hours, minutes),
+          timeString: this.toString(hours, minutes),
+          hours: parseInt(hours),
+          minutes: parseInt(minutes),
+        })
+      }
+    }
   }
 
   toDouble(hours, minutes) {
@@ -33,7 +95,15 @@ export class InputTime extends Component {
     const h = parseInt(hours) < 10 ? `0${parseInt(hours)}` : parseInt(hours);
     const m = parseInt(minutes) < 10 ? `0${parseInt(minutes)}` : parseInt(minutes);
 
-    return `${h}:${m}`;
+    if(hours && minutes) {
+      return `${h}:${m}`;
+    } else if(hours) {
+      return h;
+    } else if(minutes) {
+      return m;
+    } else {
+      return '';
+    }
   }
 
   handleKeyDown(e) {
@@ -54,6 +124,8 @@ export class InputTime extends Component {
         this.props.onChange({
           timeDouble: this.toDouble(e.target.value, this.state.minutes),
           timeString: this.toString(e.target.value, this.state.minutes),
+          hours: parseInt(e.target.value),
+          minutes: parseInt(this.state.minutes),
         })
       }
     } else if(e.target.value.length == 1 && e.target.value < 3) {
@@ -65,6 +137,8 @@ export class InputTime extends Component {
         this.props.onChange({
           timeDouble: this.toDouble(e.target.value, this.state.minutes),
           timeString: this.toString(e.target.value, this.state.minutes),
+          hours: parseInt(e.target.value),
+          minutes: parseInt(this.state.minutes),
         })
       }
     } else {
@@ -84,6 +158,8 @@ export class InputTime extends Component {
         this.props.onChange({
           timeDouble: this.toDouble(this.state.hours, e.target.value),
           timeString: this.toString(this.state.hours, e.target.value),
+          hours: parseInt(this.state.hours),
+          minutes: parseInt(e.target.value),
         })
       }
     } else if(e.target.value.length == 2 && e.target.value < 60) {
@@ -95,6 +171,8 @@ export class InputTime extends Component {
         this.props.onChange({
           timeDouble: this.toDouble(this.state.hours, e.target.value),
           timeString: this.toString(this.state.hours, e.target.value),
+          hours: parseInt(this.state.hours),
+          minutes: parseInt(e.target.value),
         })
       }
     } else {
