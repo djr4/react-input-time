@@ -113,7 +113,7 @@ class App extends Component {
           }
           </code>
         </pre>
-        <div style={{ marginTop: 32, }}><InputTime iconLeft onChange={(e) => { console.log(e)}} value={`22:14`} componentStyle={{ width: 220 }} inputStyle={{ width: 85, }} /></div>
+        <div style={{ marginTop: 32, }}><InputTime iconLeft onChange={(e) => { console.log(e)}} value={0} componentStyle={{ width: 220 }} inputStyle={{ width: 85, }} /></div>
         <p>Let's try icon on the right with different color? blue?</p>
         <pre>
           <code>

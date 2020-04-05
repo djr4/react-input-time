@@ -6,7 +6,7 @@ export class InputTime extends Component {
     super(props);
 
     this.state = {}
-    if(this.props.value) {
+    if(this.props.value != undefined) {
       if(typeof this.props.value === 'string' && this.props.value.length > 0 && this.props.value.split(':').length > 1) {
         const hours = this.props.value.split(':')[0];
         const minutes = this.props.value.split(':')[1];
@@ -25,8 +25,8 @@ export class InputTime extends Component {
           })
         }
       } else if(typeof this.props.value === 'number') {
-        const hours = this.toString(Math.floor(this.props.value));
-        const minutes = this.toString(null, this.props.value % 1 * 60);
+        const hours = this.toStringValue(Math.floor(this.props.value));
+        const minutes = this.toStringValue(this.props.value % 1 * 60);
 
         this.state = {
           hours,
@@ -68,8 +68,8 @@ export class InputTime extends Component {
       }
     } else if(this.props.value != nextProps.value && typeof nextProps.value === 'number') {
 
-      const hours = this.toString(Math.floor(nextProps.value));
-      const minutes = this.toString(null, nextProps.value % 1 * 60);
+      const hours = this.toStringValue(Math.floor(nextProps.value));
+      const minutes = this.toStringValue(nextProps.value % 1 * 60);
 
       this.setState({
         hours,
@@ -95,15 +95,11 @@ export class InputTime extends Component {
     const h = parseInt(hours) < 10 ? `0${parseInt(hours)}` : parseInt(hours);
     const m = parseInt(minutes) < 10 ? `0${parseInt(minutes)}` : parseInt(minutes);
 
-    if(hours && minutes) {
-      return `${h}:${m}`;
-    } else if(hours) {
-      return h;
-    } else if(minutes) {
-      return m;
-    } else {
-      return '';
-    }
+    return `${h}:${m}`;
+  }
+
+  toStringValue(value) {
+    return parseInt(value) < 10 ? `0${parseInt(value)}` : parseInt(value);
   }
 
   handleKeyDown(e) {
