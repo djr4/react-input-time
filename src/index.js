@@ -48,7 +48,7 @@ export class InputTime extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.props.value != nextProps.value && typeof nextProps.value === 'string') {
+    if(this.props.value !== nextProps.value && typeof nextProps.value === 'string') {
 
       const hours = nextProps.value.split(':')[0];
       const minutes = nextProps.value.split(':')[1];
@@ -58,16 +58,7 @@ export class InputTime extends Component {
         minutes,
       })
 
-      if(this.props.onChange && typeof this.props.onChange === 'function') {
-        this.props.onChange({
-          timeDouble: this.toDouble(hours, minutes),
-          timeString: this.toString(hours, minutes),
-          hours: parseInt(hours),
-          minutes: parseInt(minutes),
-        })
-      }
-    } else if(this.props.value != nextProps.value && typeof nextProps.value === 'number') {
-
+    } if(this.props.value !== nextProps.value && typeof nextProps.value === 'number') {
       const hours = this.toStringValue(Math.floor(nextProps.value));
       const minutes = this.toStringValue(nextProps.value % 1 * 60);
 
@@ -76,15 +67,8 @@ export class InputTime extends Component {
         minutes,
       })
 
-      if(this.props.onChange && typeof this.props.onChange === 'function') {
-        this.props.onChange({
-          timeDouble: this.toDouble(hours, minutes),
-          timeString: this.toString(hours, minutes),
-          hours: parseInt(hours),
-          minutes: parseInt(minutes),
-        })
-      }
     }
+
   }
 
   toDouble(hours, minutes) {
@@ -114,32 +98,36 @@ export class InputTime extends Component {
 
       this.setState({
         hours: e.target.value,
+        minutes: isNaN(this.state.minutes) ? '00' : this.state.minutes,
       })
 
       if(this.props.onChange && typeof this.props.onChange === 'function') {
         this.props.onChange({
           timeDouble: this.toDouble(e.target.value, this.state.minutes),
-          timeString: this.toString(e.target.value, this.state.minutes),
+          timeString: this.toString(e.target.value, this.state.minutes || 0),
           hours: parseInt(e.target.value),
-          minutes: parseInt(this.state.minutes),
+          minutes: parseInt(this.state.minutes || 0),
         })
       }
-    } else if(e.target.value.length == 1 && e.target.value < 3) {
+    } else if(e.target.value.length == 1) {
+      const minutes = this.state.minutes === null ? 0 : this.state.minutes;
+
       this.setState({
         hours: e.target.value,
+        minutes,
       })
 
-      if(this.props.onChange && typeof this.props.onChange === 'function') {
-        this.props.onChange({
-          timeDouble: this.toDouble(e.target.value, this.state.minutes),
-          timeString: this.toString(e.target.value, this.state.minutes),
-          hours: parseInt(e.target.value),
-          minutes: parseInt(this.state.minutes),
-        })
-      }
     } else {
       this.setState({
-        hours: 0,
+        hours: null,
+        minutes: null,
+      })
+
+      this.props.onChange({
+        timeDouble: null,
+        timeString: null,
+        hours: null,
+        minutes: null,
       })
     }
   }
@@ -150,14 +138,6 @@ export class InputTime extends Component {
         minutes: e.target.value,
       })
 
-      if(this.props.onChange && typeof this.props.onChange === 'function') {
-        this.props.onChange({
-          timeDouble: this.toDouble(this.state.hours, e.target.value),
-          timeString: this.toString(this.state.hours, e.target.value),
-          hours: parseInt(this.state.hours),
-          minutes: parseInt(e.target.value),
-        })
-      }
     } else if(e.target.value.length == 2 && e.target.value < 60) {
       this.setState({
         minutes: e.target.value,
@@ -173,7 +153,7 @@ export class InputTime extends Component {
       }
     } else {
       this.setState({
-        minutes: 0,
+        minutes: null,
       })
     }
   }
@@ -187,7 +167,17 @@ export class InputTime extends Component {
         })
       } else {
         this.setState({
-          hours: `0${this.state.hours}`
+          hours: `0${this.state.hours}`,
+          minutes: isNaN(this.state.minutes) ? '00' : this.state.minutes,
+        })
+      }
+
+      if(this.props.onChange && typeof this.props.onChange === 'function') {
+        this.props.onChange({
+          timeDouble: this.toDouble(this.state.hours, this.state.minutes),
+          timeString: this.toString(this.state.hours, this.state.minutes),
+          hours: parseInt(this.state.hours),
+          minutes: parseInt(this.state.minutes),
         })
       }
     }

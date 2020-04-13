@@ -9,12 +9,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      now: moment().format('HH:mm'),
+      now: null,
     }
   }
 
   componentDidMount() {
-    setInterval(() => { this.setState({ now: moment().format('HH:mm') }); }, 1000);
+    setInterval(() => { this.setState({ now: moment().format('HH:mm') }); }, 2000);
   }
 
   render() {
@@ -24,7 +24,7 @@ class App extends Component {
       </h1>
       <InputTime
         iconLeft
-        onChange={(e) => { console.log(e)}}
+        onChange={(e) => { console.log(e); this.setState({ now: e.timeDouble })}}
         value={this.state.now}
         label={'Time Now? '}
       />
